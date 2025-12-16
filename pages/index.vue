@@ -20,7 +20,7 @@
           </Pressable>
         </div>
       </div>
-      <div class="overflow-scroll p-2 w-full relative flex-1" id="scrollable-container">
+      <div class="max-w-[30em] overflow-scroll p-2 w-full relative flex-1" id="scrollable-container">
 				<div v-for="(chat, chat_i) in convo" class="w-full relative">
 					<div v-for="(bubble, bubble_i) in chat.parts" class="py-2 px-4 max-w-[80%] mt-2 rounded-lg w-fit"
 					:class="[chat.role == 'user' ? 'bg-green-900' : 'bg-zinc-600', chat.role == 'user' ? 'ml-auto' : 'mr-auto']"
@@ -59,7 +59,7 @@ const convo = ref([
 	{
     role: "model",
     parts: [{ text: "Something on your mind?" }],
-  },
+  }
 ])
 
 function scrollToLatestDiv(divId) {
