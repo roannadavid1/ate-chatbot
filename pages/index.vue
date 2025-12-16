@@ -35,7 +35,7 @@
 					<div class="grow h-10 rounded-full w-5/6 bg-slate-600 px-4 mr-2 box-border overflow-hidden flex items-center">
 						<div class="grow h-8 w-full bg-slate-600 box-border overflow-hidden flex items-center">
 							<textarea class="h-6 w-full bg-slate-600 resize-none focus:outline-none"
-							placeholder="Enter message" v-model="user_message" @keyup.enter="send"></textarea>
+							placeholder="Enter message" v-model="user_message" @keyup.enter="send" @focus="scrollToLatestDiv"></textarea>
 						</div>
 					</div>
 					<Pressable class="size-10" @click="send">
@@ -62,8 +62,9 @@ const convo = ref([
   }
 ])
 
-function scrollToLatestDiv(divId) {
+function scrollToLatestDiv() {
 	const scrollableContainer = document.getElementById('scrollable-container');
+	const divId = `c_${convo.value.length-1}_${convo.value[convo.value.length-1].parts.length-1}`;
 	setTimeout(() => {
 		const latestBubble = scrollableContainer.querySelector(`#${divId}`);
 		if (latestBubble) {
@@ -99,7 +100,7 @@ async function send() {
 			parts: [{ text: message }],
 		})
 		user_message.value = ''
-		scrollToLatestDiv(`c_${convo.value.length-1}_${convo.value[convo.value.length-1].parts.length-1}`)
+		scrollToLatestDiv()
 	}, 50)
 
 	// const result = await chat.sendMessage({ message });
@@ -124,7 +125,7 @@ async function send() {
 		parts: parts
 	})
 
-	scrollToLatestDiv(`c_${convo.value.length-1}_${convo.value[convo.value.length-1].parts.length-1}`)
+	scrollToLatestDiv()
 }
 
 
@@ -140,7 +141,11 @@ function escapeHtml(str) {
 
 function renderMarkdownInline(text) {
 	const escaped = escapeHtml(text)
-	return escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+	return escaped.replace(/(\*\*|[*])(.+?)\1/g, (match, delimiter, content) => {
+    return delimiter === '**'
+      ? `<strong>${content}</strong>`
+      : `<em>${content}</em>`;
+  });
 }
 
 
