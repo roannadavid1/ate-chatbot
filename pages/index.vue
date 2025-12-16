@@ -1,6 +1,6 @@
 <template>
-	<div class="w-full h-full overflow-hidden box-border">
-		<div class="w-full h-full overflow-hidden box-border flex flex-col">
+	<div class="w-full h-dvh overflow-hidden box-border">
+		<div class="w-full h-dvh overflow-hidden box-border flex flex-col">
 			<div class="w-full h-12 text-white p-2 bg-slate-900 flex items-center justify-between
 			box-border overflow-hidden shrink-0">
         <div class="h-full flex items-center">
