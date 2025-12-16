@@ -2,7 +2,7 @@
 	<div class="w-full h-dvh overflow-hidden box-border">
 		<div class="w-full h-dvh overflow-hidden box-border flex flex-col">
 			<div class="max-w-[30em] w-full h-12 text-white p-2 bg-slate-900 flex items-center justify-between
-			box-border overflow-hidden shrink-0 fixed top-0">
+			box-border overflow-hidden shrink-0">
         <div class="h-full flex items-center">
           <Pressable class="size-4 mr-4">
             <img src="@/assets/images/back.svg" class="invert"/>
@@ -20,7 +20,7 @@
           </Pressable>
         </div>
       </div>
-      <div class="overflow-scroll p-2 w-full relative mt-12 h-[calc(100dvh-7rem)]" id="scrollable-container">
+      <div class="overflow-scroll p-2 w-full relative flex-1" id="scrollable-container">
 				<div v-for="(chat, chat_i) in convo" class="w-full relative">
 					<div v-for="(bubble, bubble_i) in chat.parts" class="py-2 px-4 max-w-[80%] mt-2 rounded-lg w-fit"
 					:class="[chat.role == 'user' ? 'bg-green-900' : 'bg-zinc-600', chat.role == 'user' ? 'ml-auto' : 'mr-auto']"
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<div class="max-w-[30em] w-full h-14 flex flex-col text-white flex items-center justify-between
-			box-border overflow-hidden shrink-0 fixed bottom-0">
+			box-border overflow-hidden shrink-0">
         <div class="w-full h-12 box-border p-2 flex items-center mb-1">
 					<div class="grow h-10 rounded-full w-5/6 bg-slate-600 px-4 mr-2 box-border overflow-hidden flex items-center">
 						<div class="grow h-8 w-full bg-slate-600 box-border overflow-hidden flex items-center">
@@ -56,7 +56,7 @@ const sister = ref('Ate')
 const user_message = ref('')
 
 const convo = ref([
-  {
+	{
     role: "model",
     parts: [{ text: "Something on your mind?" }],
   },
